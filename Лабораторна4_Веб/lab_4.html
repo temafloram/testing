@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Work</title>
+    <style>
+        .container {
+            text-align: center;
+            padding: 100px
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+			background-color: rgba(0,0,0,0.5);
+
+			
+            backdrop-filter: blur(20px);
+			
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+		.image {
+			width: 150px;
+			height: 150px;
+            cursor: pointer;
+		}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>JavaScript Lab Work</h2>
+	<h3>Click image to change</h3>
+    <img src="xbox.svg" alt="Placeholder Image" id="image" class="image" onclick="changeImage2()">
+    <br><br>
+
+    <button onclick="changeText()">Change Text</button>
+    <button onclick="changeParagraphAndDiv()">Change Text in Paragraph and Div</button>
+    <button onclick="openModal()">Open Modal</button>
+    <button onclick="changeBackgroundColor()">Change Background Color</button>
+
+
+    <div id="example">
+
+    </div>
+</div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span onclick="closeModal()" style="float:right;cursor:pointer;">&times;</span>
+        <p>Please enter your name:</p>
+        <input type="text" id="nameInput">
+        <button onclick="sayHello()">OK</button>
+        <button onclick=closeModal()>Отменить</button>
+    </div>
+</div>
+
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <span onclick="closeModal()" style="float:right;cursor:pointer;">&times;</span>
+        <p>Hello Student!!! How are you? </p>
+        <input type="text" id="nameInput">
+        <button onclick="sayHello()">OK</button>
+        <button onclick=closeModal()>Отменить</button>
+    </div>
+</div>
+
+<script>
+    let imageIndex = 1;
+    let textIndex = 1;
+    let backgroundColorIndex = 0;
+
+    function changeImage() {
+        const image = document.getElementById("image");
+        image.src = `xbox.svg`;
+    }
+
+    function changeText() {
+        const button = document.querySelector("button");
+        button.textContent = `Button ${textIndex++}`;
+    }
+
+    function changeParagraphAndDiv() {
+        const paragraph = document.querySelector("p");
+        const div = document.getElementById("example");
+        paragraph.textContent = `Text in Paragraph ${textIndex++}`;
+        div.textContent = `Text in Div ${textIndex++}`;
+    }
+
+    function openModal() {
+        const modal = document.getElementById("modal");
+        modal.style.display = "block"
+
+    }
+
+    function closeModal() {
+        const modal = document.getElementById("modal");
+        modal.style.display = "none"
+    }
+
+    function sayHello() {
+        const nameInput = document.getElementById("nameInput").value;
+        alert(`Hello, ${nameInput}!`);
+        closeModal();
+    }
+
+    function changeBackgroundColor() {
+        const colors = ["lightblue", "lightgreen", "lightcoral"];
+        const container = document.querySelector("div.container");
+        container.style.backgroundColor = colors[backgroundColorIndex];
+        backgroundColorIndex = (backgroundColorIndex + 1) % colors.length;
+    }
+</script>
+<script>
+    // Масив з посиланнями на картинки
+    const images = [
+		"ps1.svg",
+		"xbox.svg",
+		"ps1.svg",
+		"xbox.svg",
+    ];
+
+    let currentIndex = 0; // Початковий індекс в масиві
+
+    function changeImage2() {
+        const image = document.getElementById("image");
+        // Збільшення індексу, перевірка на переповнення масиву
+        currentIndex = (currentIndex + 1) % images.length;
+        // Зміна src на наступне зображення
+        image.src = images[currentIndex];
+    }
+</script>
+</body>
+</html>
